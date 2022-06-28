@@ -7,7 +7,7 @@
  * @author     Muhammet ŞAFAK <info@muhammetsafak.com.tr>
  * @copyright  Copyright © 2022 InitPHP Container
  * @license    http://initphp.github.io/license.txt  MIT
- * @version    pre-0.1
+ * @version    0.2
  * @link       https://www.muhammetsafak.com.tr
  */
 
@@ -83,16 +83,22 @@ class Container implements ContainerInterface
     {
         $dependencies = [];
         foreach ($arguments as $argument) {
-            $dependency = $argument->getClass();
-            if(is_null($dependency)){
-                if($argument->isDefaultValueAvailable()){
-                    $dependencies[] = $argument->getDefaultValue();
-                    continue;
-                }
-                throw new DependencyHasNoDefaultValueException('Sorry cannot resolve class dependency ' . $argument->name);
+            if($argument->isDefaultValueAvailable()){
+                $dependencies[] = $argument->getDefaultValue();
                 continue;
             }
-            $dependencies[] = $this->get($dependency->name);
+            if($argument->hasType()){
+                if (($type = $argument->getType()) !== null) {
+                    if(!$type->isBuiltin()){
+                        $dependencies[] = $this->get($type->getName());
+                    }
+                }
+            }
+            if($argument->allowsNull()){
+                $dependencies[] = null;
+                continue;
+            }
+            throw new DependencyHasNoDefaultValueException('Sorry cannot resolve class dependency ' . $argument->name);
         }
         return $dependencies;
     }

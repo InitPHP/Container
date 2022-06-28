@@ -7,7 +7,7 @@
  * @author     Muhammet ŞAFAK <info@muhammetsafak.com.tr>
  * @copyright  Copyright © 2022 InitPHP Container
  * @license    http://initphp.github.io/license.txt  MIT
- * @version    0.2
+ * @version    0.3
  * @link       https://www.muhammetsafak.com.tr
  */
 
@@ -91,6 +91,7 @@ class Container implements ContainerInterface
                 if (($type = $argument->getType()) !== null) {
                     if(!$type->isBuiltin()){
                         $dependencies[] = $this->get($type->getName());
+                        continue;
                     }
                 }
             }

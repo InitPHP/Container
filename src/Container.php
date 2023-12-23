@@ -7,7 +7,7 @@
  * @author     Muhammet ŞAFAK <info@muhammetsafak.com.tr>
  * @copyright  Copyright © 2022 InitPHP Container
  * @license    http://initphp.github.io/license.txt  MIT
- * @version    0.3
+ * @version    0.4
  * @link       https://www.muhammetsafak.com.tr
  */
 
@@ -28,7 +28,8 @@ class Container implements ContainerInterface
         if($concrete === null){
             $concrete = $id;
         }
-        $this->instance[$id] = $concrete;
+
+        return $this->instance[$id] = $concrete;
     }
 
     /**
@@ -39,7 +40,16 @@ class Container implements ContainerInterface
         if(!$this->has($id)){
             $this->set($id);
         }
-        return $this->resolve($this->instance[$id]);
+        $instance = $this->instance[$id];
+        if (is_object($instance)) {
+            return $instance;
+        }
+
+        if (is_string($instance) && class_exists($instance)) {
+            return $this->set($id, $this->resolve($instance));
+        }
+
+        return $instance;
     }
 
     /**

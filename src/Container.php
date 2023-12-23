@@ -29,6 +29,10 @@ class Container implements ContainerInterface
             $concrete = $id;
         }
 
+        if (is_string($concrete) && class_exists($concrete)) {
+            $concrete = $this->resolve($concrete);
+        }
+
         return $this->instance[$id] = $concrete;
     }
 
@@ -40,16 +44,8 @@ class Container implements ContainerInterface
         if(!$this->has($id)){
             $this->set($id);
         }
-        $instance = $this->instance[$id];
-        if (is_object($instance)) {
-            return $instance;
-        }
 
-        if (is_string($instance) && class_exists($instance)) {
-            return $this->set($id, $this->resolve($instance));
-        }
-
-        return $instance;
+        return $this->instance[$id];
     }
 
     /**

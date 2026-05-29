@@ -1,7 +1,7 @@
 <?php
 
 /**
- * DependencyHasNoDefaultValueException.php
+ * DependencyIsNotInstantiableException.php
  *
  * This file is part of InitPHP Container.
  *
@@ -15,9 +15,10 @@ declare(strict_types=1);
 namespace InitPHP\Container\Exception;
 
 /**
- * Thrown when a constructor parameter cannot be autowired and has neither a
- * default value nor a nullable type to fall back on.
+ * Thrown when the container is asked to build a class that cannot be
+ * instantiated, such as an interface, an abstract class or a class with a
+ * non-public constructor.
  */
-class DependencyHasNoDefaultValueException extends ContainerException
+class DependencyIsNotInstantiableException extends ContainerException
 {
 }

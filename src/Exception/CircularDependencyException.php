@@ -1,7 +1,7 @@
 <?php
 
 /**
- * DependencyHasNoDefaultValueException.php
+ * CircularDependencyException.php
  *
  * This file is part of InitPHP Container.
  *
@@ -15,9 +15,9 @@ declare(strict_types=1);
 namespace InitPHP\Container\Exception;
 
 /**
- * Thrown when a constructor parameter cannot be autowired and has neither a
- * default value nor a nullable type to fall back on.
+ * Thrown when a class depends on itself either directly or through a chain of
+ * other classes, which would otherwise cause unbounded recursion.
  */
-class DependencyHasNoDefaultValueException extends ContainerException
+class CircularDependencyException extends ContainerException
 {
 }

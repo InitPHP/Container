@@ -1,7 +1,7 @@
 <?php
 
 /**
- * DependencyHasNoDefaultValueException.php
+ * ContainerException.php
  *
  * This file is part of InitPHP Container.
  *
@@ -14,10 +14,13 @@ declare(strict_types=1);
 
 namespace InitPHP\Container\Exception;
 
+use Exception;
+use Psr\Container\ContainerExceptionInterface;
+
 /**
- * Thrown when a constructor parameter cannot be autowired and has neither a
- * default value nor a nullable type to fall back on.
+ * Base exception for every error raised while the container is building or
+ * retrieving an entry. Specific failure modes extend this class.
  */
-class DependencyHasNoDefaultValueException extends ContainerException
+class ContainerException extends Exception implements ContainerExceptionInterface
 {
 }

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * DependencyHasNoDefaultValueException.php
+ * NotFoundException.php
  *
  * This file is part of InitPHP Container.
  *
@@ -14,10 +14,12 @@ declare(strict_types=1);
 
 namespace InitPHP\Container\Exception;
 
+use Psr\Container\NotFoundExceptionInterface;
+
 /**
- * Thrown when a constructor parameter cannot be autowired and has neither a
- * default value nor a nullable type to fall back on.
+ * Thrown by {@see \InitPHP\Container\Container::get()} when the requested
+ * identifier is neither a registered entry nor an autowirable class.
  */
-class DependencyHasNoDefaultValueException extends ContainerException
+class NotFoundException extends ContainerException implements NotFoundExceptionInterface
 {
 }

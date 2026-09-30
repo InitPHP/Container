@@ -2,6 +2,7 @@
 
 Minimal [PSR-11](https://www.php-fig.org/psr/psr-11/) dependency injection container with reflection-based autowiring.
 
+[![Designed & Maintained with Tan](https://www.muhammetsafak.com.tr/badges/designed-maintained-with-tan.svg)](https://www.muhammetsafak.com.tr/en/tan/)
 [![Latest Stable Version](https://poser.pugx.org/initphp/container/v/stable)](https://packagist.org/packages/initphp/container)
 [![Total Downloads](https://poser.pugx.org/initphp/container/downloads)](https://packagist.org/packages/initphp/container)
 [![License](https://poser.pugx.org/initphp/container/license)](https://packagist.org/packages/initphp/container)

@@ -8,7 +8,7 @@
  *
  * This file is part of InitPHP Container.
  *
- * @author     Muhammet ŞAFAK <info@muhammetsafak.com.tr>
+ * @author     Muhammet ŞAFAK <info@muhammetsafak.com>
  * @copyright  Copyright © 2022 InitPHP Container
  * @license    https://github.com/InitPHP/Container/blob/main/LICENSE  MIT
  */

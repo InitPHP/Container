@@ -155,13 +155,13 @@ All exceptions live in `InitPHP\Container\Exception` and implement the relevant 
 
 ## Documentation
 
-In-depth guides with runnable examples live in the [`docs/`](./docs) directory:
+In-depth guides with runnable examples live in the [`docs/`](./docs/Home.md) directory:
 
-- [Getting Started](./docs/getting-started.md)
-- [Autowiring](./docs/autowiring.md)
-- [Binding & Factories](./docs/binding-and-factories.md)
-- [Exceptions & Error Handling](./docs/exceptions.md)
-- [Limitations](./docs/limitations.md)
+- [Quick Start](./docs/Quick-Start.md)
+- [Autowiring](./docs/Autowiring.md)
+- [Binding & Factories](./docs/Binding-And-Factories.md)
+- [Exceptions & Error Handling](./docs/Exceptions.md)
+- [Limitations](./docs/Limitations.md)
 
 ## Testing
 

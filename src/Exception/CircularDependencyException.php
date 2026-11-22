@@ -18,6 +18,4 @@ namespace InitPHP\Container\Exception;
  * Thrown when a class depends on itself either directly or through a chain of
  * other classes, which would otherwise cause unbounded recursion.
  */
-class CircularDependencyException extends ContainerException
-{
-}
+class CircularDependencyException extends ContainerException {}

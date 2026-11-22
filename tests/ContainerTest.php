@@ -249,7 +249,7 @@ final class ContainerTest extends TestCase
     public function testClosureFactoryReceivesContainer(): void
     {
         $this->container->set('inner', new stdClass());
-        $this->container->set('outer', fn (ContainerInterface $c) => $c->get('inner'));
+        $this->container->set('outer', fn(ContainerInterface $c) => $c->get('inner'));
 
         $this->assertSame($this->container->get('inner'), $this->container->get('outer'));
     }

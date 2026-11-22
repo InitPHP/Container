@@ -21,6 +21,4 @@ use Psr\Container\ContainerExceptionInterface;
  * Base exception for every error raised while the container is building or
  * retrieving an entry. Specific failure modes extend this class.
  */
-class ContainerException extends Exception implements ContainerExceptionInterface
-{
-}
+class ContainerException extends Exception implements ContainerExceptionInterface {}

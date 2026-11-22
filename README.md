@@ -12,7 +12,7 @@ The container resolves entries lazily. You can register values, factories and cl
 
 ## Requirements
 
-- PHP 8.1 or higher
+- PHP 8.2 or higher
 - [`psr/container`](https://packagist.org/packages/psr/container) `^2.0`
 
 ## Installation

@@ -164,7 +164,7 @@ class Container implements ContainerInterface
     {
         if (isset($this->building[$concrete])) {
             throw new CircularDependencyException(
-                'Circular dependency detected while resolving "' . $concrete . '".'
+                'Circular dependency detected while resolving "' . $concrete . '".',
             );
         }
 
@@ -251,7 +251,7 @@ class Container implements ContainerInterface
         }
 
         throw new DependencyHasNoDefaultValueException(
-            'Unable to resolve the value of parameter "$' . $parameter->getName() . '".'
+            'Unable to resolve the value of parameter "$' . $parameter->getName() . '".',
         );
     }
 }

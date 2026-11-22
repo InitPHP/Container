@@ -19,6 +19,4 @@ namespace InitPHP\Container\Exception;
  * instantiated, such as an interface, an abstract class or a class with a
  * non-public constructor.
  */
-class DependencyIsNotInstantiableException extends ContainerException
-{
-}
+class DependencyIsNotInstantiableException extends ContainerException {}

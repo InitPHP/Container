@@ -12,7 +12,7 @@ the rest of the wiki documents the current behaviour.
 
 | Area | Early snapshot | Now |
 | --- | --- | --- |
-| Minimum PHP | 7.4 | **8.1** at the first tagged release (1.0.0); **8.2** on `main` since |
+| Minimum PHP | 7.4 | **8.1** in 1.x; **8.2** from 2.0.0 |
 | `set()` return | returned the resolved value | returns **`void`** |
 | `set()` timing | resolved the class **eagerly** | stores a definition, resolved **lazily** |
 | `get()` on unknown id | returned the id string | throws **`NotFoundException`** |
@@ -27,7 +27,7 @@ the rest of the wiki documents the current behaviour.
 ### A modern PHP is now required
 
 The library uses `mixed` types and modern reflection handling. The first tagged
-release (1.0.0) required PHP `^8.1`; the unreleased `main` branch raises the
+release (1.0.0) required PHP `^8.1`; version 2.0.0 raises the
 minimum to `^8.2`. Update your platform (and your own `composer.json`
 constraint) accordingly.
 

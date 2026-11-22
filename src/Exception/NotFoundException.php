@@ -20,6 +20,4 @@ use Psr\Container\NotFoundExceptionInterface;
  * Thrown by {@see \InitPHP\Container\Container::get()} when the requested
  * identifier is neither a registered entry nor an autowirable class.
  */
-class NotFoundException extends ContainerException implements NotFoundExceptionInterface
-{
-}
+class NotFoundException extends ContainerException implements NotFoundExceptionInterface {}

@@ -18,6 +18,4 @@ namespace InitPHP\Container\Exception;
  * Thrown when a constructor parameter cannot be autowired and has neither a
  * default value nor a nullable type to fall back on.
  */
-class DependencyHasNoDefaultValueException extends ContainerException
-{
-}
+class DependencyHasNoDefaultValueException extends ContainerException {}

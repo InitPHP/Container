@@ -138,7 +138,7 @@ $container->has('missing');          // false
 3. If `$id` is an existing class name, autowire it and cache it.
 4. Otherwise throw `NotFoundException`.
 
-Constructor parameters are resolved as follows: a class-typed parameter is fetched from the container; otherwise its default value is used; otherwise `null` is supplied for nullable parameters. If none of these apply, resolution fails.
+Constructor parameters are resolved as follows: a class-typed parameter whose class exists is fetched from the container. If that fails with a container exception and the parameter has a default value or is nullable, the default (or `null`) is used instead; otherwise the exception propagates. Any other parameter (a scalar, a union type, an unbound interface) uses its default value, then `null` if nullable. If none of these apply, `DependencyHasNoDefaultValueException` is thrown.
 
 ## Exceptions
 
@@ -146,9 +146,9 @@ All exceptions live in `InitPHP\Container\Exception` and implement the relevant 
 
 | Exception | Implements | Thrown when |
 | --- | --- | --- |
-| `NotFoundException` | `Psr\Container\NotFoundExceptionInterface` | The identifier is neither registered nor an existing class. |
-| `DependencyIsNotInstantiableException` | `Psr\Container\ContainerExceptionInterface` | The target is an abstract class or has a non-public constructor. An interface with no binding throws `NotFoundException`. |
-| `DependencyHasNoDefaultValueException` | `Psr\Container\ContainerExceptionInterface` | A constructor parameter cannot be autowired and has no default or nullable fallback. |
+| `NotFoundException` | `Psr\Container\NotFoundExceptionInterface` | The identifier is neither registered nor an existing class. An interface with no binding requested directly with `get()` is such an identifier. |
+| `DependencyIsNotInstantiableException` | `Psr\Container\ContainerExceptionInterface` | A class that has to be built is abstract, an enum, or has a non-public constructor. It is thrown for `get()` on that class, for a required dependency of that type, and for a binding that names it as the concrete class. A nullable or defaulted dependency of that type falls back to `null` or its default instead. |
+| `DependencyHasNoDefaultValueException` | `Psr\Container\ContainerExceptionInterface` | A constructor parameter cannot be autowired and has no default or nullable fallback: a scalar, a union type, or an interface with no binding reached as a required dependency. |
 | `CircularDependencyException` | `Psr\Container\ContainerExceptionInterface` | A class depends on itself directly or through a cycle. |
 
 `ContainerException` is the base class for `NotFoundException` and the three resolution exceptions, so you can catch every container error with a single `catch (ContainerException $e)`.

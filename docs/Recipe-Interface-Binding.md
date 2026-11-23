@@ -109,7 +109,9 @@ the very same object.
 
 - **Forgetting the binding.** Requesting an unbound interface throws
   `NotFoundException`; requiring it as a non-optional dependency throws
-  `DependencyHasNoDefaultValueException`. Bind it during bootstrap.
+  `DependencyHasNoDefaultValueException`. Bind it during bootstrap. A bare
+  `set(CacheInterface::class)` does not count as a binding: it stores the
+  interface name as a string (see [Exceptions](Exceptions.md#notfoundexception)).
 - **Type-hinting the concrete class.** Type-hint the interface in consumers; name
   the concrete class only in the binding. Otherwise the indirection buys you
   nothing.

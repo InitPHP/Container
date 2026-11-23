@@ -61,9 +61,15 @@ never populated by the container.
 Because `class_exists()` does not report interfaces, an unbound interface is
 unknown to the container: requesting it directly raises `NotFoundException`, and
 requiring it as a non-optional dependency raises
-`DependencyHasNoDefaultValueException`. Always
+`DependencyHasNoDefaultValueException`, and an optional one (`?I $i`) receives
+`null`. Always
 [bind interfaces](Binding-And-Factories.md#binding-interfaces-to-implementations)
-to a concrete class.
+to a concrete class or a closure. `set(I::class)` with no concrete, or
+`set(I::class, J::class)` with another interface, is not a binding: the
+container stores the interface name as a plain string and `get()` returns that
+string, so a class that requires the interface fails with a PHP `TypeError`
+rather than a container exception. See
+[Exceptions](Exceptions.md#notfoundexception) for every route.
 
 ## `has()` and autowiring
 

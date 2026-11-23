@@ -106,7 +106,7 @@ $container->get(App\Service::class); // an autowired instance
 | Exception | When |
 | --- | --- |
 | [`NotFoundException`](Exceptions.md#notfoundexception) | `$id` is neither registered nor an existing class. |
-| [`DependencyIsNotInstantiableException`](Exceptions.md#dependencyisnotinstantiableexception) | The target (or a dependency) is an abstract class or has a non-public constructor. |
+| [`DependencyIsNotInstantiableException`](Exceptions.md#dependencyisnotinstantiableexception) | The target (or a required dependency) is an abstract class, an enum, or has a non-public constructor. |
 | [`DependencyHasNoDefaultValueException`](Exceptions.md#dependencyhasnodefaultvalueexception) | A required constructor parameter cannot be autowired and has no default or nullable fallback. |
 | [`CircularDependencyException`](Exceptions.md#circulardependencyexception) | The dependency graph contains a cycle. |
 
@@ -163,7 +163,7 @@ All exceptions live in `InitPHP\Container\Exception`.
 | --- | --- | --- |
 | `ContainerException` | implements `ContainerExceptionInterface` | Base class for all of the below. |
 | `NotFoundException` | extends `ContainerException`, implements `NotFoundExceptionInterface` | `get()` cannot find the identifier. |
-| `DependencyIsNotInstantiableException` | extends `ContainerException` | Target is an abstract class or has a non-public constructor. |
+| `DependencyIsNotInstantiableException` | extends `ContainerException` | Target is an abstract class, an enum, or has a non-public constructor. |
 | `DependencyHasNoDefaultValueException` | extends `ContainerException` | A required parameter cannot be resolved. |
 | `CircularDependencyException` | extends `ContainerException` | The dependency graph contains a cycle. |
 

@@ -63,6 +63,11 @@ You rarely need this for plain classes — autowiring already handles them. It
 matters when you want to **alias** one identifier to another class, which is the
 basis of interface binding below.
 
+> This only works for class names. An interface is not a class name for
+> `class_exists()`, so `set(CacheInterface::class)` (or aliasing it to another
+> interface) registers a plain string: `get(CacheInterface::class)` returns the
+> interface name itself, not an object.
+
 ## Binding interfaces to implementations
 
 Type-hinting an interface is the idiomatic way to depend on an abstraction. The

@@ -138,7 +138,7 @@ $container->has('missing');          // false
 3. If `$id` is an existing class name, autowire it and cache it.
 4. Otherwise throw `NotFoundException`.
 
-Constructor parameters are resolved as follows: a class-typed parameter whose class exists is fetched from the container. If that fails with a container exception and the parameter has a default value or is nullable, the default (or `null`) is used instead; otherwise the exception propagates. Any other parameter (a scalar, a union type, an unbound interface) uses its default value, then `null` if nullable. If none of these apply, `DependencyHasNoDefaultValueException` is thrown.
+Constructor parameters are resolved as follows: a class-typed parameter whose type the container knows (a registered entry such as a bound interface, or an existing class) is fetched from the container. If that fails with a container exception and the parameter has a default value or is nullable, the default (or `null`) is used instead; otherwise the exception propagates. Any other parameter (a scalar, a union type, a class that does not exist, an interface with no binding) uses its default value, then `null` if nullable. If none of these apply, `DependencyHasNoDefaultValueException` is thrown.
 
 ## Exceptions
 

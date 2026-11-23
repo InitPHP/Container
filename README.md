@@ -147,7 +147,7 @@ All exceptions live in `InitPHP\Container\Exception` and implement the relevant 
 | Exception | Implements | Thrown when |
 | --- | --- | --- |
 | `NotFoundException` | `Psr\Container\NotFoundExceptionInterface` | The identifier is neither registered nor an existing class. |
-| `DependencyIsNotInstantiableException` | `Psr\Container\ContainerExceptionInterface` | The target is an interface, abstract class, or has a non-public constructor. |
+| `DependencyIsNotInstantiableException` | `Psr\Container\ContainerExceptionInterface` | The target is an abstract class or has a non-public constructor. An interface with no binding throws `NotFoundException`. |
 | `DependencyHasNoDefaultValueException` | `Psr\Container\ContainerExceptionInterface` | A constructor parameter cannot be autowired and has no default or nullable fallback. |
 | `CircularDependencyException` | `Psr\Container\ContainerExceptionInterface` | A class depends on itself directly or through a cycle. |
 

@@ -16,7 +16,7 @@ namespace InitPHP\Container\Exception;
 
 /**
  * Thrown when the container is asked to build a class that cannot be
- * instantiated, such as an interface, an abstract class or a class with a
- * non-public constructor.
+ * instantiated, such as an abstract class or a class with a non-public
+ * constructor. An interface with no binding throws NotFoundException instead.
  */
 class DependencyIsNotInstantiableException extends ContainerException {}

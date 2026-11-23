@@ -165,8 +165,8 @@ $container->get(Plain::class) instanceof Plain; // true
 
 | Target | Result | Why |
 | --- | --- | --- |
-| **Interface** (unbound) | `NotFoundException` when requested directly; `DependencyHasNoDefaultValueException` as a required dependency | `class_exists()` does not report interfaces, so the container treats an unbound interface as unknown. [Bind it first.](Binding-And-Factories.md#binding-interfaces-to-implementations) |
-| **Abstract class** | `DependencyIsNotInstantiableException` | `class_exists()` reports it, so the container tries to build it and fails because it is not instantiable. |
+| **Interface** (unbound) | `NotFoundException` when requested directly; `DependencyHasNoDefaultValueException` as a required dependency; `null` or the default as an optional one | `class_exists()` does not report interfaces, so the container treats an unbound interface as unknown. [Bind it first.](Binding-And-Factories.md#binding-interfaces-to-implementations) |
+| **Abstract class** or **enum** | `DependencyIsNotInstantiableException` | `class_exists()` reports it, so the container tries to build it and fails because it is not instantiable. As an optional dependency (nullable or with a default) the fallback is used instead. |
 | **Non-public constructor** | `DependencyIsNotInstantiableException` | Reflection reports the class as not instantiable. |
 | **Circular dependency** | `CircularDependencyException` | A → B → A would otherwise recurse forever. |
 

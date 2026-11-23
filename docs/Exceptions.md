@@ -37,8 +37,8 @@ PSR interface) first.
 | Exception | Trigger |
 | --- | --- |
 | `NotFoundException` | `get($id)` where `$id` is neither registered nor an existing class. |
-| `DependencyIsNotInstantiableException` | Building an abstract class, or a class with a non-public constructor. |
-| `DependencyHasNoDefaultValueException` | A required constructor parameter cannot be autowired and has no default or nullable fallback. |
+| `DependencyIsNotInstantiableException` | Building an abstract class, an enum, or a class with a non-public constructor, whether it was requested directly, reached as a required dependency, or named as the concrete class of a binding. |
+| `DependencyHasNoDefaultValueException` | A required constructor parameter cannot be autowired and has no default or nullable fallback (a scalar, a union type, an unbound interface). |
 | `CircularDependencyException` | A class depends on itself directly or through a chain. |
 
 ---
@@ -68,15 +68,30 @@ interface PaymentGatewayInterface {}
 $container->get(PaymentGatewayInterface::class); // NotFoundException
 ```
 
-Bind the interface to an implementation to make it resolvable — see
-[Binding & Factories](Binding-And-Factories.md#binding-interfaces-to-implementations).
+`NotFoundException` is only the answer for that one route. What an interface
+produces depends on how the container reaches it:
+
+| Route | Result |
+| --- | --- |
+| `get(I::class)`, no binding | `NotFoundException` |
+| Required dependency `I $i` of a class being built | `DependencyHasNoDefaultValueException` |
+| Optional dependency `?I $i` or `?I $i = null` | no exception; `null` is injected |
+| `set(I::class, Impl::class)` | resolves to `Impl`, for `get()` and for dependencies |
+| `set(I::class, fn () => new Impl())` | resolves to what the closure returns |
+| `set(I::class)` with no concrete | no exception; `get(I::class)` returns the string `'I'` and `has()` is `true`. A class that requires `I` then fails with a PHP `TypeError`, which is not a container exception |
+| `set(I::class, J::class)` where `J` is another interface | no exception; `get(I::class)` returns the string `'J'`, and a class that requires `I` fails with a `TypeError` |
+
+The last two rows are not errors the container reports: an interface name is not
+a class name for `class_exists()`, so such a definition is stored and returned
+as a plain string. Always bind an interface to a concrete class or a closure —
+see [Binding & Factories](Binding-And-Factories.md#binding-interfaces-to-implementations).
 
 ---
 
 ## `DependencyIsNotInstantiableException`
 
-Thrown when the container reaches a class it cannot instantiate: an abstract
-class, or a class with a non-public constructor.
+Thrown when the container has to build a class it cannot instantiate: an
+abstract class, an enum, or a class with a non-public constructor.
 
 ```php
 use InitPHP\Container\Exception\DependencyIsNotInstantiableException;
@@ -91,8 +106,12 @@ try {
 }
 ```
 
-This applies both when the class is requested directly and when it is reached as
-a dependency of another class.
+This applies on every route into the class: requested directly with `get()`,
+reached as a **required** dependency of another class, or named as the concrete
+class of a binding (`set(Interface::class, AbstractRepository::class)`). It does
+not apply to a dependency that is optional: when the parameter has a default or
+is nullable, the container falls back to it instead of throwing — see
+[Autowiring → Optional dependencies](Autowiring.md#optional-dependencies).
 
 ---
 
@@ -100,7 +119,9 @@ a dependency of another class.
 
 Thrown when a constructor parameter cannot be autowired and has neither a default
 value nor a nullable type to fall back on. Typical cases: a scalar without a
-default, or a required, unbound interface dependency.
+default, a union or intersection type, or a required, unbound interface
+dependency (see [`NotFoundException`](#notfoundexception) for the other routes
+an interface can take).
 
 ```php
 use InitPHP\Container\Exception\DependencyHasNoDefaultValueException;

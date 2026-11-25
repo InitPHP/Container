@@ -16,8 +16,10 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   is injected. `set(Interface::class)` with no concrete class, or an alias to
   another interface, is not a binding: the name is stored as a plain string.
 - `DependencyIsNotInstantiableException` is documented for abstract classes, enums
-  and non-public constructors on every route, and no longer for an unbound
-  interface. The docblock of the class was corrected the same way; there is no
+  and non-public constructors on every route where the class has to be built
+  (`get()`, a required dependency, a binding's concrete class; an optional
+  dependency falls back to `null` or its default instead), and no longer for an
+  unbound interface. The docblock of the class was corrected the same way; there is no
   behaviour change.
 
 ## [2.0.0] - 2026-11-22

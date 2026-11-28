@@ -145,7 +145,7 @@ interface. Register the value, add a default, or bind the interface. See
 
 ### Which PHP versions are supported?
 
-PHP 8.2+, with CI running the suite on 8.2, 8.3, 8.4, and 8.5 against both the
+PHP 8.2+, with CI running the suite on 8.2, 8.3, 8.4, 8.5, and 8.6 against both the
 lowest and highest dependency versions. See [Installation](Installation.md).
 
 ### What is the PHPStan level?

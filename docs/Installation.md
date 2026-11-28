@@ -4,7 +4,7 @@
 
 | | |
 | --- | --- |
-| PHP | `^8.2` (tested on 8.2 – 8.5) |
+| PHP | `^8.2` (tested on 8.2 – 8.6) |
 | Extensions | None |
 | Runtime dependencies | [`psr/container`](https://packagist.org/packages/psr/container) `^2.0` |
 
@@ -60,6 +60,7 @@ Every push and pull request runs the test matrix against:
 - PHP 8.3
 - PHP 8.4
 - PHP 8.5
+- PHP 8.6
 
 …each with both the lowest and highest allowed dependency versions. A separate
 job runs PHPStan (`max` level) and PHP-CS-Fixer (PER-CS). If you discover a

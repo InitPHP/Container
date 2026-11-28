@@ -73,7 +73,7 @@ See [Limitations](Limitations.md) for the rationale behind the unsupported rows.
 ## Package metadata
 
 - **License**: MIT
-- **Minimum PHP**: 8.2 (tested on 8.2 – 8.5)
+- **Minimum PHP**: 8.2 (tested on 8.2 – 8.6)
 - **Runtime dependencies**: [`psr/container`](https://packagist.org/packages/psr/container) `^2.0`
 - **Provides**: `psr/container-implementation` `2.0`
 - **Packagist**: [`initphp/container`](https://packagist.org/packages/initphp/container)
